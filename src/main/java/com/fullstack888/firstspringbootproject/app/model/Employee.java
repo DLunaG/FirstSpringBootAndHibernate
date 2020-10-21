@@ -1,6 +1,7 @@
 
 package com.fullstack888.firstspringbootproject.app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Employee {
@@ -20,15 +23,15 @@ public class Employee {
     private String name;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="ub_id", referencedColumnName ="ub_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Ubication ubication;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "dept_id", referencedColumnName="dept_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Department department;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName="id")
-    @JsonManagedReference
+    @JsonBackReference
     private Project project;
     private double salary;
     
